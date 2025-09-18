@@ -12,14 +12,20 @@ import { Item, GildedRose } from '@/gilded-rose';
  */
 
 describe('Gilded Rose Approval', () => {
-  it('should foo', () => {
-    const gildedRose = new GildedRose([new Item('foo', 0, 0)]);
-    const items = gildedRose.updateQuality();
+  it('should handle a single item correctly', () => {
+    const gildedRose = new GildedRose([
+      new Item('foo', 0, 0),
+      new Item('Aged Brie', 2, 0),
+      new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20),
+      new Item('Sulfuras, Hand of Ragnaros', 0, 80),
+      new Item('Conjured Mana Cake', 3, 6),
+    ]);
 
+    const items = gildedRose.updateQuality();
     expect(items).toMatchSnapshot();
   });
 
-  it('should thirtyDays', () => {
+  it('should simulate thirty days correctly', () => {
     const consoleOutput = execSync(
       'ts-node test/golden-master-text-test.ts 30',
       { encoding: 'utf-8' }
